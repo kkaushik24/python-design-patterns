@@ -36,4 +36,16 @@ class CriteriaMale(Criteria):
         
         return male_person_list
 
+
+class CriteriaFemale(Criteria):
+
+    def meet_criteria(self, person_list):
+        female_person_list = []
+        for person in person_list:
+            if person.get_gender() == "Female":
+                female_person_list.append(person)
+        
+        return female_person_list
+
+
         
