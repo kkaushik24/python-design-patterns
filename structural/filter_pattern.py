@@ -48,4 +48,13 @@ class CriteriaFemale(Criteria):
         return female_person_list
 
 
+class CriteriaSingle(Criteria):
+
+    def meet_criteria(self, person_list):
+        single_person_list = []
+        for person in person_list:
+            if person.get_marital_status() == "Single":
+                single_person_list.append(person)
         
+        return single_person_list
+ 
