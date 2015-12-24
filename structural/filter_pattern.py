@@ -86,3 +86,15 @@ class CriteriaAnd(Criteria):
         return self.other_criteria.meet_criteria(first_criteria_items)
 
 
+if __name__ == '__main__':
+    person_list = []
+    person_list.append(Person('A','Male', 'Single'))
+    person_list.append(Person('B','Female', 'Married'))
+
+    male = CriteriaMale()
+    female = CriteriaFemale()
+    single = CriteriaSingle()
+
+
+
+
