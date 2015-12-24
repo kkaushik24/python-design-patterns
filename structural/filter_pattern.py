@@ -57,4 +57,32 @@ class CriteriaSingle(Criteria):
                 single_person_list.append(person)
         
         return single_person_list
- 
+
+class CriteriaOr(Criteria):
+
+    def __init__(self, criteria, other_criteria):
+        self.criteria = criteria
+        self.other_criteria = other_criteria
+
+    def meet_criteria(self, person_list):
+        first_criteria_items = self.criteria.meet_criteria(person_list)
+        second_criteria_items = self.other_criteria.meet_criteria(person_list)
+
+        for person in other_criteria_items:
+            if person not in first_criteria_items:
+                first_criteria_items.append(person)
+
+        return first_criteria_items
+
+
+class CriteriaAnd(Criteria):
+
+    def __init__(self, criteria, other_criteria):
+        self.criteria = criteria
+        self.other_criteria = other_criteria
+
+    def meet_criteria(self, person_list):
+        first_criteria_items = self.criteria.meet_criteria(person_list)
+        return self.other_criteria.meet_criteria(first_criteria_items)
+
+
