@@ -1,4 +1,5 @@
-from abc import ABCMeta, abcmethod
+from abc import ABCMeta, abstractmethod
+
 class Person:
 
     def __init__(self, name, gender, marital_status):
@@ -18,9 +19,9 @@ class Person:
 
 class Criteria:
 
-   __metaclass__ = ABCMeta
+    __metaclass__ = ABCMeta
 
-    @abcmethod
+    @abstractmethod
     def meet_criteria(self, person_list):
         pass
 
@@ -68,7 +69,7 @@ class CriteriaOr(Criteria):
         first_criteria_items = self.criteria.meet_criteria(person_list)
         second_criteria_items = self.other_criteria.meet_criteria(person_list)
 
-        for person in other_criteria_items:
+        for person in second_criteria_items:
             if person not in first_criteria_items:
                 first_criteria_items.append(person)
 
