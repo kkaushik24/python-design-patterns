@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
+
 class Person:
 
     def __init__(self, name, gender, marital_status):
@@ -9,7 +10,7 @@ class Person:
 
     def get_name(self):
         return self.name
-    
+
     def get_gender(self):
         return self.gender
 
@@ -25,7 +26,6 @@ class Criteria:
     def meet_criteria(self, person_list):
         pass
 
-    
 
 class CriteriaMale(Criteria):
 
@@ -34,7 +34,7 @@ class CriteriaMale(Criteria):
         for person in person_list:
             if person.get_gender() == "Male":
                 male_person_list.append(person)
-        
+
         return male_person_list
 
 
@@ -45,7 +45,7 @@ class CriteriaFemale(Criteria):
         for person in person_list:
             if person.get_gender() == "Female":
                 female_person_list.append(person)
-        
+
         return female_person_list
 
 
@@ -56,8 +56,9 @@ class CriteriaSingle(Criteria):
         for person in person_list:
             if person.get_marital_status() == "Single":
                 single_person_list.append(person)
-        
+
         return single_person_list
+
 
 class CriteriaOr(Criteria):
 
@@ -87,15 +88,38 @@ class CriteriaAnd(Criteria):
         return self.other_criteria.meet_criteria(first_criteria_items)
 
 
+def print_persons(persons):
+
+    for person in persons:
+        print ("name: ", person.get_name(),
+               "gender: ", person.get_gender(),
+               "marital_status: ", person.get_marital_status())
+
+
 if __name__ == '__main__':
     person_list = []
-    person_list.append(Person('A','Male', 'Single'))
-    person_list.append(Person('B','Female', 'Married'))
+    person_list.append(Person('A', 'Male', 'Single'))
+    person_list.append(Person('B', 'Male', 'Married'))
+    person_list.append(Person('C', 'Female', 'Single'))
+    person_list.append(Person('D', 'Female', 'Married'))
 
     male = CriteriaMale()
     female = CriteriaFemale()
     single = CriteriaSingle()
+    single_male = CriteriaAnd(male, single)
+    single_or_female = CriteriaOr(female, single)
 
+    print "male"
+    print_persons(male.meet_criteria(person_list))
 
+    print "female"
+    print_persons(female.meet_criteria(person_list))
 
+    print "single"
+    print_persons(single.meet_criteria(person_list))
 
+    print "single_male"
+    print_persons(single.meet_criteria(person_list))
+
+    print "single or female"
+    print_persons(single_or_female.meet_criteria(person_list))
