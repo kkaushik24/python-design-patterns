@@ -13,10 +13,10 @@ class Stock:
     __quantity__ = 10
 
     def buy(self):
-        print "stock name:{0} quantity:{1} bought".format(__name__, __quantity__)
+        print "stock name:{0} quantity:{1} bought".format(Stock.__name__, Stock.__quantity__)
 
-    def buy(self):
-        print "stock name:{0} quantity:{1} sold".format(__name__, __quantity__)
+    def sell(self):
+        print "stock name:{0} quantity:{1} sold".format(Stock.__name__, Stock.__quantity__)
 
 
 class BuyStock(Order):
@@ -43,7 +43,7 @@ class Broker:
         self.__order_list__ = []
 
     def take_order(self, order):
-        orderList.append(order)
+        self.__order_list__.append(order)
 
     def place_order(self):
         for order in self.__order_list__:
@@ -51,7 +51,7 @@ class Broker:
         self.__order_list__ = []
 
 if __name__ == '__main__':
-    abc_stock = stock()
+    abc_stock = Stock()
     buy_stock = BuyStock(abc_stock)
     sell_stock = SellStock(abc_stock)
     broker = Broker()
